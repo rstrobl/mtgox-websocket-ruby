@@ -1,11 +1,16 @@
+require 'rubygems'
+require 'bundler/setup'
 require 'eventmachine'
-require './lib/mtgox_websocket.rb'
+require 'mtgox/websocket'
 
 EM.run do
-  mtgox = MtGoxWebsocket::Client.connect
+  mtgox = MtGox::Websocket::Client.connect
   
   mtgox.on(:open) do
     puts "Connection opened"
+    
+    # Unsubscribe ticker
+    mtgox.unsubscribe('d5f06780-30a8-4a48-a2f8-7ed181b4a13f')
   end
   
   mtgox.on(:close) do
