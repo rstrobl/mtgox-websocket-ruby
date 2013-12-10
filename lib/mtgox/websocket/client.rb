@@ -18,7 +18,7 @@ module MtGox
       end
     
       def connect
-        @conn = ::Faye::WebSocket::Client.new('ws://websocket.mtgox.com:80/mtgox', nil, { 
+        @conn = ::Faye::WebSocket::Client.new('wss://websocket.mtgox.com:443/mtgox', nil, { 
           headers: {'Origin' => @args[:headers] && @args[:headers][:origin]  || @@default_origin}
         })
             
